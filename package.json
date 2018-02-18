@@ -1,0 +1,24 @@
+{
+  "name": "tucker",
+  "version": "1.0.0",
+  "description": "A system for building c-mera apps",
+  "main": "index.js",
+  "scripts": {
+    "test": "false"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huijari/tucker.git"
+  },
+  "keywords": [
+    "c-mera",
+    "lisp",
+    "builder"
+  ],
+  "author": "Alexandre Cesar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/huijari/tucker/issues"
+  },
+  "homepage": "https://github.com/huijari/tucker#readme"
+}
