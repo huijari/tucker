@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/huijari/tucker#readme",
   "dependencies": {
-    "commander": "^2.14.1"
+    "commander": "^2.14.1",
+    "inquirer": "^5.1.0"
   }
 }
