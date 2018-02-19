@@ -92,4 +92,4 @@ function getTargetDefaults(target) {
   return defaults[target]
 }
 
-module.exports = command
+module.exports = { action, command }

@@ -4,8 +4,8 @@ const { init, build, run } = require('./command')
 
 program.description('A system for building c-mera apps').version('1.0.0')
 
-init(program)
-build(program)
-run(program)
+init.command(program)
+build.command(program)
+run.command(program)
 
 program.parse(process.argv)

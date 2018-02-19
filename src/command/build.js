@@ -1,5 +1,10 @@
 function command(program) {
-  program.command('build').description('Compile the binary target')
+  program
+    .command('build')
+    .description('Compile the binary target')
+    .action(action)
 }
 
-module.exports = command
+function action() {}
+
+module.exports = { action, command }
