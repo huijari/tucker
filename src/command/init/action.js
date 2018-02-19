@@ -1,21 +1,14 @@
 const inquirer = require('inquirer')
-const { promisify } = require('util')
-const { writeFile } = require('fs')
-
-function command(program) {
-  program
-    .command('init')
-    .description('Initialize a new tucker project')
-    .action(action)
-}
+const path = require('path')
+const { copyFileSync, mkdirSync, writeFileSync } = require('fs')
 
 async function action() {
   const config = await getConfigFromUser()
-  await promisify(writeFile)(
-    'tucker.json',
-    JSON.stringify(config, null, '  '),
-    'utf8'
-  )
+  writeFileSync('tucker.json', JSON.stringify(config, null, '  '), 'utf8')
+  mkdirSync('src')
+
+  const template = path.resolve(__dirname, 'template.lisp')
+  copyFileSync(template, 'src/main.lisp')
 }
 
 async function getConfigFromUser() {
@@ -92,4 +85,4 @@ function getTargetDefaults(target) {
   return defaults[target]
 }
 
-module.exports = { action, command }
+module.exports = action
