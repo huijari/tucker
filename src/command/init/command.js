@@ -7,4 +7,4 @@ function command(program) {
     .action(action)
 }
 
-module.exports = action
+module.exports = command
