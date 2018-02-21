@@ -6,7 +6,9 @@
   "scripts": {
     "test": "false"
   },
-  "bin": "src/index.js",
+  "bin": {
+    "tucker": "src/index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/huijari/tucker.git"
