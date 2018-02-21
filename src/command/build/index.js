@@ -1,3 +1,5 @@
+const transpile = require('./transpile')
+
 function command(program) {
   program
     .command('build')
@@ -5,6 +7,8 @@ function command(program) {
     .action(action)
 }
 
-function action() {}
+function action() {
+  transpile()
+}
 
 module.exports = { action, command }
