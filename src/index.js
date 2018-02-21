@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const program = require('commander')
 
 const { init, build, run } = require('./command')
