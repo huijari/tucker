@@ -1,4 +1,7 @@
+const { readFileSync } = require('fs')
+
 const transpile = require('./transpile')
+const compile = require('./compile')
 
 function command(program) {
   program
@@ -7,8 +10,10 @@ function command(program) {
     .action(action)
 }
 
-function action() {
-  transpile()
+async function action() {
+  const config = JSON.parse(readFileSync('tucker.json'))
+  await transpile(config)
+  compile(config)
 }
 
 module.exports = { action, command }

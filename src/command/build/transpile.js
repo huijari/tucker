@@ -3,16 +3,13 @@ const {
   existsSync,
   mkdirSync,
   readdirSync,
-  readFileSync,
   statSync
 } = require('fs')
 const { promisify } = require('util')
 const { execSync } = require('child_process')
 const rmdir = require('rimraf')
 
-async function transpile() {
-  const config = JSON.parse(readFileSync('tucker.json'))
-
+async function transpile(config) {
   if (existsSync('build')) await promisify(rmdir)('build')
   mkdirSync('build')
   folder('src', config)
