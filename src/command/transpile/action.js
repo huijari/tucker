@@ -3,11 +3,17 @@ const {
   existsSync,
   mkdirSync,
   readdirSync,
+  readFileSync,
   statSync
 } = require('fs')
 const { promisify } = require('util')
 const { execSync } = require('child_process')
 const rmdir = require('rimraf')
+
+async function action() {
+  const config = JSON.parse(readFileSync('tucker.json'))
+  await transpile(config)
+}
 
 async function transpile(config) {
   if (existsSync('build')) await promisify(rmdir)('build')
@@ -37,7 +43,7 @@ function processFile(file, config) {
   if (file.endsWith('.lisp')) {
     const filter = config.format ? `| ${config.format}` : ''
     const to = filename(file, config)
-    const command = `cm ${config.target} ${file} ${filter} > ${to}`
+    const command = `cm-${config.target} ${file} ${filter} > ${to}`
     execSync(command)
   } else copyFileSync(file, buildPath(file))
 }
@@ -60,4 +66,4 @@ function extension(target) {
   return extensions[target]
 }
 
-module.exports = transpile
+module.exports = action

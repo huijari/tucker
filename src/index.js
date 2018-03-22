@@ -2,11 +2,12 @@
 
 const program = require('commander')
 
-const { init, build, run } = require('./command')
+const { init, transpile, build, run } = require('./command')
 
-program.description('A system for building c-mera apps').version('1.1.4')
+program.description('A system for building c-mera apps').version('1.2.0')
 
 init.command(program)
+transpile.command(program)
 build.command(program)
 run.command(program)
 
