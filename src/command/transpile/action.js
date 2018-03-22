@@ -41,29 +41,21 @@ function buildPath(path) {
 
 function processFile(file, config) {
   if (file.endsWith('.lisp')) {
-    const filter = config.format ? `| ${config.format}` : ''
+    const filter = config.transpile.formatter
+      ? `| ${config.transpile.formatter}`
+      : ''
     const to = filename(file, config)
-    const command = `cm-${config.target} ${file} ${filter} > ${to}`
+    const flags = config.transpile.flags ? config.transpile.flags : ''
+    const command = `${config.transpile.exec} ${flags} ${file} ${filter} > ${to}`
     execSync(command)
   } else copyFileSync(file, buildPath(file))
 }
 
-function filename(file, { target }) {
+function filename(file, { transpile }) {
   const name = buildPath(file).replace(/.lisp$/, '')
   if (/\..*/.test(name)) return name
 
-  return `${name}.${extension(target)}`
-}
-
-function extension(target) {
-  const extensions = {
-    c: 'c',
-    cxx: 'cpp',
-    glsl: '',
-    cuda: '',
-    ocl: ''
-  }
-  return extensions[target]
+  return `${name}.${transpile.extension}`
 }
 
 module.exports = action

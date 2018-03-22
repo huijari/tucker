@@ -14,8 +14,9 @@ async function action() {
   await transpile.action()
 
   const config = JSON.parse(readFileSync('tucker.json'))
-  const find = `find build -name "*.c"`
-  const compiler = `${config.compiler} -o build/${config.name}`
+  const find = `find build -name "${config.compile.files}"`
+  const flags = config.compile.flags ? config.compile.flags : ''
+  const compiler = `${config.compile.exec} ${flags} -o build/${config.name}`
   const command = `${find} | xargs ${compiler}`
   execSync(command)
 }

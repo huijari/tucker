@@ -1,14 +1,10 @@
 const inquirer = require('inquirer')
-const path = require('path')
-const { copyFileSync, mkdirSync, writeFileSync } = require('fs')
+const { mkdirSync, writeFileSync } = require('fs')
 
 async function action() {
   const config = await getConfigFromUser()
   writeFileSync('tucker.json', JSON.stringify(config, null, '  '), 'utf8')
   mkdirSync('src')
-
-  const template = path.resolve(__dirname, 'template.lisp')
-  copyFileSync(template, 'src/main.lisp')
 }
 
 async function getConfigFromUser() {
@@ -34,13 +30,7 @@ async function getConfigFromUser() {
   ])
 
   const targetDefaults = getTargetDefaults(target)
-  const { format, compiler } = await inquirer.prompt([
-    {
-      type: 'input',
-      name: 'format',
-      message: 'Formatter',
-      default: targetDefaults.format
-    },
+  const { compiler } = await inquirer.prompt([
     {
       type: 'input',
       name: 'compiler',
@@ -49,7 +39,18 @@ async function getConfigFromUser() {
     }
   ])
 
-  return { name, version, target, format, compiler }
+  return {
+    name,
+    version,
+    transpile: {
+      exec: `cm-${target}`,
+      extension: target
+    },
+    compile: {
+      exec: compiler,
+      files: `*.${target}`
+    }
+  }
 }
 
 function getFolderName() {
