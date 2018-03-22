@@ -1,6 +1,6 @@
 {
   "name": "tucker",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "A system for building c-mera apps",
   "main": "src/index.js",
   "scripts": {
