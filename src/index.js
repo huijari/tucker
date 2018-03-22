@@ -4,7 +4,7 @@ const program = require('commander')
 
 const { init, build, run } = require('./command')
 
-program.description('A system for building c-mera apps').version('1.0.0')
+program.description('A system for building c-mera apps').version('1.1.4')
 
 init.command(program)
 build.command(program)
